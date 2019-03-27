@@ -79,10 +79,27 @@ let playerWon = function(piece, row, column) {
   return false;
 }
 
-let turnPlayed = true;
 
 let playGame = function() {
+  let turnPlayed = true;
+  let count = 0;
+  let currentPiece = 'x'
   while (!playerWon || !draw) {
+    if (togglePiece(currentPiece, row, column)){
+      count ++;
+    }
+    //After every move test if a player has won or if it's a draw 
+    playerWon(piece, row, column);
+    draw(count);
+
+    //Switches between users
+    if (turnPlayed){
+      turnPlayed = !turnPlayed;
+      currentPiece = 'x'
+    } else{
+      turnPlayed = !turnPlayed;
+      currentPiece = 'o'      
+    }
     //Get each player to toggle a move
     //If turn played is true then toggle x 
     //Else toggle y 
